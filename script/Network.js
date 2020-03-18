@@ -219,7 +219,46 @@ var LOGGER;
                         "s-s-t": "14.0235",
                         "s-t-s": "33.3257"
                     }
-                }]
+                },
+                    {
+                        "index": 4,
+                        "edgeId": "From Bus '1' to Bus '4'",
+                        "source": 0,
+                        "target": 1,
+                        "edgeData": {
+                            "fbus": "1",
+                            "tbus": "4",
+                            "r": "0.042",
+                            "x": "0.9",
+                            "b": "0.3",
+                            "rateA": "9000.0",
+                            "rateB": "0.0",
+                            "rateC": "0.0",
+                            "ratio": "0.0",
+                            "angle": "0.0",
+                            "status": "1",
+                            "angmin": "-30.0",
+                            "angmax": "30.0",
+                            "UB": 69.51790934997776
+                        },
+                        "edgeType": "TestType",
+                        "edgeName": "1-4-4-1-1",
+                        "isMultiLine": false,
+                        "solutionData": {
+                            "angle": 0,
+                            "r": 0.042,
+                            "ratio": 1,
+                            "b": -1.1086966162579273,
+                            "g": 0.05173917542536994,
+                            "p-s-t": "-13.2403",
+                            "q-s-t": "4.6210",
+                            "p-t-s": "13.4811",
+                            "q-t-s": "-30.4772",
+                            "s-s-t": "14.0235",
+                            "s-t-s": "33.3257"
+                        }
+                    }
+                    ]
             },
             busDataObj: {
                 "dataObjList": [{
@@ -531,7 +570,44 @@ var LOGGER;
                         "cost2": "0.000000",
                         "cost3": "0.000000"
                     }
-                }]
+                },
+                    {
+                        "bus": "4",
+                        "Pg": "0.0",
+                        "Qg": "-4.843",
+                        "Qmax": "1000.0",
+                        "Qmin": "-1000.0",
+                        "Vg": "0.9",
+                        "mBase": "100.0",
+                        "status": "1",
+                        "Pmax": "0.0",
+                        "Pmin": "0.0",
+                        "Pc1": "0.0",
+                        "Pc2": "0.0",
+                        "Qc1min": "0.0",
+                        "Qc1max": "0.0",
+                        "Qc2min": "0.0",
+                        "Qc2max": "0.0",
+                        "ramp_agc": "0.0",
+                        "ramp_10": "0.0",
+                        "ramp_30": "0.0",
+                        "ramp_q": "0.0",
+                        "apf": "0.0",
+                        "Pd": "95.0",
+                        "Qd": "50.0",
+                        "id": 3,
+                        "DOMID": "bus3topDecoHelp",
+                        "costData": {
+                            "GenID": "2",
+                            "startup": "0.0",
+                            "shutdown": "0.0",
+                            "n": "3",
+                            "cost1": "0.000000",
+                            "cost2": "0.000000",
+                            "cost3": "0.000000"
+                        }
+                    },
+                ]
             },
             // branchDataObj: {},
             // busDataObj: {},
@@ -592,6 +668,7 @@ var LOGGER;
         var edgesData = networkConfigObj.branchDataObj.dataObjList;
         var standardEdgesData = [], transformerEdgesData = [], lineChargeEdgesData = [], MultiLineEdgesData = [],
             multiEdgeName = "", edgeCouple = [];
+        var testEdgesData = [];
 
         for (var edgeIndex = 0; edgeIndex < edgesData.length; edgeIndex++) {
             var crtEdge = edgesData[edgeIndex];
@@ -601,6 +678,8 @@ var LOGGER;
                 transformerEdgesData.push(crtEdge);
             } else if (crtEdge.edgeType === "LineCharge" && !crtEdge.isMultiLine) {
                 lineChargeEdgesData.push(crtEdge);
+            } else if (crtEdge.edgeType === "TestType" && !crtEdge.isMultiLine) {
+                testEdgesData.push(crtEdge);
             } else if (crtEdge.isMultiLine) {
                 if (multiEdgeName === "") {
                     multiEdgeName = crtEdge.edgeName.slice(0, -2);
@@ -617,6 +696,7 @@ var LOGGER;
         var standardEdges = new NETWORK.GRAPH.StandardEdges(visHelp, standardEdgesData);
         var transformerEdges = new NETWORK.GRAPH.TransformerEdges(visHelp, transformerEdgesData);
         var lineChargeEdges = new NETWORK.GRAPH.LineChargeEdges(visHelp, lineChargeEdgesData);
+        var testEdges = new NETWORK.GRAPH.TestEdges(visHelp, testEdgesData);
 
         var MultiLineEdges = [];
         for (var multiIndex = 0; multiIndex < MultiLineEdgesData.length; multiIndex++) {
@@ -634,6 +714,7 @@ var LOGGER;
             standardEdges.tick();
             transformerEdges.tick();
             lineChargeEdges.tick();
+            testEdges.tick();
             for (var multiIndex = 0; multiIndex < MultiLineEdges.length; multiIndex++) {
                 MultiLineEdges[multiIndex].tick();
             }

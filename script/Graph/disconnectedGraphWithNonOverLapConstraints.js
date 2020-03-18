@@ -57,6 +57,7 @@ function drawDisconnectedGraph() {
 	//NOTE - THE LOGIC FOR GENERATION OF MULTI LINE NEEDS TO BE CORRECTED - THE CURRENT LOGIC GENERATES THE LINES BUT VIOLATES THE CLASS STRUCTURE. 
 	// THIS NEEDS TO BE FIXED.
 	var standardEdgesData = [], transformerEdgesData = [], lineChargeEdgesData = [],MultiLineEdgesData = [], multiEdgeName = "",edgeCouple = [];
+	var testEdgesData = [];
 
 	//Sorting the edge data to support cases like 'nesta_case29_edin.m' where the branches are all jumbled up.
 	edgesData = edgesData.sort(
@@ -78,6 +79,9 @@ function drawDisconnectedGraph() {
 		else if(crtEdge.edgeType === "Transformer" && !crtEdge.isMultiLine) {
 			transformerEdgesData.push(crtEdge);
 		}
+		else if(crtEdge.edgeType === "TestType" && !crtEdge.isMultiLine) {
+			testEdgesData.push(crtEdge);
+		}
 		else if(crtEdge.edgeType === "LineCharge" && !crtEdge.isMultiLine) {
 			lineChargeEdgesData.push(crtEdge);
 		}
@@ -98,6 +102,7 @@ function drawDisconnectedGraph() {
 	var standardEdges = new NETWORK.GRAPH.StandardEdges(vis,standardEdgesData);
 	var transformerEdges = new NETWORK.GRAPH.TransformerEdges(vis,transformerEdgesData);
 	var lineChargeEdges = new NETWORK.GRAPH.LineChargeEdges(vis,lineChargeEdgesData);
+	var testEdges = new NETWORK.GRAPH.TestEdges(vis, testEdgesData);
 	
 
 	var MultiLineEdges=[];
@@ -223,6 +228,7 @@ function drawDisconnectedGraph() {
 		standardEdges.tick();
 		transformerEdges.tick();
 		lineChargeEdges.tick();
+		testEdges.tick();
 		for(var multiIndex = 0; multiIndex<MultiLineEdges.length;multiIndex++) {
 			MultiLineEdges[multiIndex].tick();
 		}

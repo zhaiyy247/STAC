@@ -341,8 +341,11 @@
 			var edgeDataObj = networkConfigObj.branchDataObj.dataObjList[branchIndexer];			
 			
 			var edgeType = "Standard";
+			// if(parseFloat(edgeDataObj.ratio) !== 0.0 || parseFloat(edgeDataObj.angle) !== 0.0) {
+			// 	edgeType = "Transformer";
+			// }
 			if(parseFloat(edgeDataObj.ratio) !== 0.0 || parseFloat(edgeDataObj.angle) !== 0.0) {
-				edgeType = "Transformer";
+				edgeType = "TestType";
 			}
 			else if(parseFloat(edgeDataObj.b) !== 0.0){
 				edgeType = "LineCharge";
@@ -415,6 +418,7 @@
 								 "isMultiLine" : isMultiLine,
 							};
 			edges[edgeName] = edge;
+			console.log(edge);
 		}
 		
 		var edgeData = [];		
