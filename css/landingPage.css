@@ -125,20 +125,20 @@
 	margin:0;
 }
 
-.developedInfo {
-	text-align: center;
-}
+/*.developedInfo {*/
+	/*text-align: center;*/
+/*}*/
 
-.landingLogoNicta {
-	height: 60px;
-	width: 60px;
-}
+/*.landingLogoNicta {*/
+	/*height: 60px;*/
+	/*width: 60px;*/
+/*}*/
 
-.landingLogoMonash {
-	height: 55px;
-	width: 174px;
-	margin-left:20px;
-}
+/*.landingLogoMonash {*/
+	/*height: 55px;*/
+	/*width: 174px;*/
+	/*margin-left:20px;*/
+/*}*/
 
 #loadingImage {
     -webkit-animation: rotation 2s infinite linear;
@@ -147,6 +147,10 @@
 @-webkit-keyframes rotation {
     from {-webkit-transform: rotate(0deg);}
     to   {-webkit-transform: rotate(359deg);}
+}
+
+.chooseButton{
+	margin-top: 20px;
 }
 
 /***Investigative region for Overlay***/
@@ -162,7 +166,6 @@
     position : fixed;
     text-align : center;
     display : none;
-    
     .center {
         top:50%;
         position : relative;
