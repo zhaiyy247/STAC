@@ -31,7 +31,32 @@
             "width": 4 * VIEWS.SharedFunctionality.R / 3,
             "rx": VIEWS.SharedFunctionality.R / 3,
             "ry": VIEWS.SharedFunctionality.R / 3,
-        });
+        })
+            .classed("OffStatus", function (d) {
+                if (parseInt(d.edgeData.status) === 0) {
+                    return true;
+                }
+            })
+            .on("mouseover", function (d) {
+                var warningData = d.validationWarning;
+                var errorData = d.validationError;
+                var bWarning = d.warning;
+                var bError = d.error;
+                var TooltipData;
+                if (bError && bWarning) {
+                    TooltipData = errorData;
+                } else if (bError) {
+                    TooltipData = errorData;
+                } else if (bWarning) {
+                    TooltipData = warningData;
+                } else {
+                    TooltipData = NETWORK.RULES.edgeToolTip;
+                }
+                NETWORK.TOOLTIP.showToolTip(d, d3.event, TooltipData);
+            })
+            .on("mouseout", function (d) {
+                NETWORK.TOOLTIP.hideToolTip(d);
+            });
     };
 
     NETWORK.GRAPH.TestEdges.prototype.moveDecorator = function () {

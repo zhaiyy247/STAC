@@ -339,7 +339,8 @@
 		
 		for (branchIndexer = 0 ; branchIndexer < networkConfigObj.branchDataObj.dataObjList.length; branchIndexer++) {
 			var edgeDataObj = networkConfigObj.branchDataObj.dataObjList[branchIndexer];			
-			
+
+			// edgeType根据输入数据的ratio、angle、b属性判断
 			var edgeType = "Standard";
 			// if(parseFloat(edgeDataObj.ratio) !== 0.0 || parseFloat(edgeDataObj.angle) !== 0.0) {
 			// 	edgeType = "Transformer";
