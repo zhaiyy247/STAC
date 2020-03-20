@@ -419,7 +419,7 @@
 								 "isMultiLine" : isMultiLine,
 							};
 			edges[edgeName] = edge;
-			console.log(edge);
+			// console.log(edge);
 		}
 		
 		var edgeData = [];		
