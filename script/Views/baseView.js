@@ -83,6 +83,12 @@ VIEWS.SharedFunctionality = (function(){
 		goToInitialStateTriggered: false,
 		nodeMouseDown:false,
 		bShowHelp:false,
+		edgeColors: {
+			standardEdgeColor: "black",
+			transformerEdgeColor: "green",
+			lineChargeEdgeColor: "red",
+			testTypeEdgeColor: "blue",
+		},
 		
 		createMouseEvent :function(type,x,y,bShiftKey) {
 			return createCustomMouseEvent(type,x,y,bShiftKey);

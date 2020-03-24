@@ -6,11 +6,31 @@
      **/
     NETWORK.GRAPH.Edges = function (svg, edgesData) {
         this.data = edgesData;
+        let colors = VIEWS.SharedFunctionality.edgeColors;
         this.edges = svg.selectAll(".edges").data(this.data).enter().append("line").attr("class", "edge")
             .attr("id", function (d) {
                 d.edgeData["DOMID"] = ("edge" + d.index);
                 return d.edgeData.DOMID;
             })
+            .style( // 根据bus类型改变线段颜色
+                "stroke", function (d) {
+                    if(d.edgeType === "Standard"){
+                        return colors.standardEdgeColor;
+                    }
+                    else if(d.edgeType === "Transformer"){
+                        return colors.transformerEdgeColor;
+                    }
+                    else if (d.edgeType === "LineCharge"){
+                        return colors.lineChargeEdgeColor;
+                    }
+                    else if (d.edgeType === "TestType"){
+                        return colors.testTypeEdgeColor;
+                    }
+                    else {
+                        console.log(d.edgeType);
+                    }
+                }
+            )
             .classed("OffStatus", function (d) {
                 if (parseInt(d.edgeData.status) === 0) {
                     return true;

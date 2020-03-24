@@ -125,7 +125,7 @@ body {
     text-align: center;
     line-height: 2px;
     background: grey;
-    color: back;
+    color: black;
     display: none;
 }
 
@@ -202,7 +202,6 @@ body {
     stroke-width: 1.5px;
 }
 
-;
 .bottomDecorator {
 }
 
@@ -222,7 +221,7 @@ body {
 .edgeDecorator {
     fill: white;
     stroke: black;
-    stroke-width: 1px;
+    stroke-width: 2px;
 }
 
 .tranformerEdgeDecoratorWrapper {

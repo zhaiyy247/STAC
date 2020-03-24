@@ -64,7 +64,7 @@
             .on("mouseout", function (d) {
                 NETWORK.TOOLTIP.hideToolTip(d);
             });
-        console.log(svg.selectAll(".testEdge")[0]);
+        // console.log(svg.selectAll(".testEdge")[0]);
     };
 
     NETWORK.GRAPH.TestEdges.prototype.moveDecorator = function () {
